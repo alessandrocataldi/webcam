@@ -1,0 +1,113 @@
+:root {
+  --border: 1px solid #ececec;
+  --border-2: 1px solid #d0d0d0;
+  --bg-0: #fff;
+  --bg: #fafafa;
+  --bg-2: #f1f1f1;
+  --tx: #1f1f21;
+  --bl: #e7eeff;
+  --bl-1: #335bfb;
+  --sh: 0px 30px 60px 0px rgba(0, 0, 0, 0.2);
+
+  --radius: 16px;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--tx);
+  font-size: 0.9rem;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 16px;
+}
+
+.sidebar,
+.aside {
+  height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--bg);
+}
+.sidebar {
+  border-right: var(--border);
+}
+
+.aside {
+  border-left: var(--border);
+}
+
+#video-area {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+}
+
+#video-area video {
+  border-radius: var(--radius);
+  box-shadow: var(--sh);
+}
+
+button {
+  padding: 8px 16px;
+  background-color: var(--tx);
+  color: var(--bg-0);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-secondary {
+  background-color: var(--bg-0);
+  color: var(--tx);
+  border: var(--border-2);
+}
+.btn-secondary:hover {
+  background-color: var(--bg);
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  padding: 8px;
+}
+ul li b {
+  padding: 4px;
+  background-color: var(--bl);
+  color: var(--bl-1);
+  border-radius: 4px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+}
