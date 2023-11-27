@@ -6,6 +6,7 @@ import { useReactMediaRecorder } from "react-media-recorder";
 import Webcam from "react-webcam";
 import "./App.css";
 import { sizeVideo } from "./VideoData";
+import Bg from "./components/Bg";
 import ButtonGroup from "./components/ButtonGroup";
 import InfoVideo from "./components/InfoVideo";
 
@@ -120,6 +121,8 @@ function App() {
       <main id="video-area">
         {videoFromat && (
           <>
+            <Bg />
+            <h4>{videoFromat.label}</h4>
             <Webcam
               key={webcamKey}
               id="webcam"
@@ -151,7 +154,7 @@ function App() {
         )}
       </main>
       <aside className="aside">
-        <h4>Cambia il formato video da qui:</h4>
+        <h4 style={{ padding: 8 }}>Cambia il formato video da qui:</h4>
         <ButtonGroup handleFormatChange={handleFormatChange} />
       </aside>
     </div>

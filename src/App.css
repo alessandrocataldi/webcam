@@ -29,17 +29,15 @@ body {
 .App {
   display: grid;
   grid-template-columns: 280px 1fr 280px;
-  gap: 16px;
 }
 
 .sidebar,
 .aside {
   height: 100vh;
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   background-color: var(--bg);
+  gap: 16px;
 }
 .sidebar {
   border-right: var(--border);
@@ -56,9 +54,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 24px;
-  padding: 16px;
 }
 
 #video-area video {
@@ -104,10 +101,42 @@ ul li b {
   display: flex;
   flex-direction: row;
   gap: 24px;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 button:disabled {
   cursor: not-allowed;
   background-color: #ddd;
+}
+
+#video-area .row {
+  z-index: 999;
+  padding: 16px;
+  width: 100%;
+  background-color: var(--bg);
+  border-top: var(--border);
+}
+
+#video-area h4 {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--bg);
+  border-bottom: var(--border);
+}
+
+#video-area #bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -999;
+  width: fit-content;
+  height: fit-content;
+}
+ul li {
+  padding: 0;
+}
+li {
+  padding: 8px !important;
 }

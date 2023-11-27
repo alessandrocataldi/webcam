@@ -13,9 +13,10 @@ const ButtonGroup = ({ handleFormatChange }: ButtonGroupProps) => {
     { label: "1:1 (stress test)", value: "1:1" },
   ];
   return (
-    <>
+    <div style={{ padding: 8 }}>
       {formats.map((format, index) => (
         <button
+          style={{ marginBottom: 8 }}
           key={index}
           className="btn-secondary"
           onClick={() => handleFormatChange(format.value)}
@@ -23,7 +24,7 @@ const ButtonGroup = ({ handleFormatChange }: ButtonGroupProps) => {
           {format.label}
         </button>
       ))}
-    </>
+    </div>
   );
 };
 export default ButtonGroup;
