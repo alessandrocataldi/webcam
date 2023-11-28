@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import Webcam from "react-webcam";
+import ClockIcon from "../icons/ClockIcon";
+import WifiGoodIcon from "../icons/WifiGoodIcon";
 
 const questionDemo =
   "Alcuni colleghi si sono dimessi nello stesso periodo. Come tuo capo, ti chiedo di lavorare per tre sabati consecutivi, in straordinario, per metterci in pari con il lavoro. Parlando con gli altri tuoi colleghi, noti un certo malumore a riguardo. Convincimi a non lavorare di sabato.";
@@ -94,10 +96,27 @@ const Card = () => {
     document.body.removeChild(a);
     console.log("download");
   };
+
+  // Extra: countdown
+  // Extra: alert
   return (
     <section id="card" className="bg-white p-6 flex flex-col gap-4">
-      <section className="text-center">
+      <section className="flex flex-row justify-between">
         <h3 className="text-xl font-bold">Domanda 1 di 3</h3>
+        <div
+          id="status-videointerview"
+          className="flex flex-row gap-2 items-center"
+        >
+          <div id="wifiStatus">
+            <WifiGoodIcon />
+          </div>
+          <div
+            id="timer"
+            className="flex flex-row items-center gap-2 text-xl font-semibold"
+          >
+            <ClockIcon /> <span>3:00</span>
+          </div>
+        </div>
       </section>
       <section
         style={{
