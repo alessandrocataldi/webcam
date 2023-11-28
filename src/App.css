@@ -124,16 +124,6 @@ button:disabled {
   border-bottom: var(--border);
 }
 
-#video-area #bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -999;
-  width: fit-content;
-  height: fit-content;
-}
 ul li {
   padding: 0;
 }
