@@ -1,11 +1,7 @@
-// interface CardProps {
-//   children: React.ReactNode | React.ReactNode[];
-
 import { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import Webcam from "react-webcam";
 
-// }
 const questionDemo =
   "Alcuni colleghi si sono dimessi nello stesso periodo. Come tuo capo, ti chiedo di lavorare per tre sabati consecutivi, in straordinario, per metterci in pari con il lavoro. Parlando con gli altri tuoi colleghi, noti un certo malumore a riguardo. Convincimi a non lavorare di sabato.";
 
