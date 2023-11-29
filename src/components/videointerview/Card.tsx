@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import Webcam from "react-webcam";
+import Counter from "../Counter";
 import ClockIcon from "../icons/ClockIcon";
 import WifiGoodIcon from "../icons/WifiGoodIcon";
 
@@ -8,6 +9,27 @@ const questionDemo =
   "Alcuni colleghi si sono dimessi nello stesso periodo. Come tuo capo, ti chiedo di lavorare per tre sabati consecutivi, in straordinario, per metterci in pari con il lavoro. Parlando con gli altri tuoi colleghi, noti un certo malumore a riguardo. Convincimi a non lavorare di sabato.";
 
 const Card = () => {
+  // Extra: countdown
+  const [startCountdown, setStartCountdon] = useState(false);
+
+  // Imposto un formato di base
+  const [videoFormat] = useState({
+    width: 720,
+    height: 480,
+  });
+
+  // Attivo le cose "react-media-recorder" e inserisco i formati che desidero per la registrazione
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({
+      video: {
+        width: videoFormat.width,
+        height: videoFormat.height,
+      },
+    });
+
+  // Imposto lo status per disattivare i pulsanti per quando sono in fase di registrazione ecc
+  const [recordingStatus, setRecordingStatus] = useState(status);
+
   // Il componente Webcam e le proprieta in videoConstraints in html e css genera un elemento HTML video:
   // Camera attuale che formato ha in HTML?
   /*
@@ -51,30 +73,13 @@ const Card = () => {
     height: { min: videoSizeHeight },
   };
 
-  // Imposto un formato di base
-  const [videoFormat] = useState({
-    width: 720,
-    height: 480,
-  });
-
-  // Attivo le cose "react-media-recorder" e inserisco i formati che desidero per la registrazione
-  const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({
-      video: {
-        width: videoFormat.width,
-        height: videoFormat.height,
-      },
-    });
-
-  // Imposto lo status per disattivare i pulsanti per quando sono in fase di registrazione ecc
-  const [recordingStatus, setRecordingStatus] = useState(status);
-
   // Avvia la registrazione
   const handleStartRecording = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     startRecording();
     setRecordingStatus("recording");
     console.log("recording");
+    setStartCountdon(true);
   };
 
   // Stoppa la registrazione
@@ -83,6 +88,7 @@ const Card = () => {
     stopRecording();
     setRecordingStatus("stopped");
     console.log("stopped");
+    setStartCountdon(false);
   };
 
   // Crea un link e scarica il file video registrato
@@ -97,8 +103,6 @@ const Card = () => {
     console.log("download");
   };
 
-  // Extra: countdown
-  // Extra: alert
   return (
     <section id="card" className="bg-white p-6 flex flex-col gap-4">
       <section className="flex flex-row justify-between">
@@ -114,7 +118,11 @@ const Card = () => {
             id="timer"
             className="flex flex-row items-center gap-2 text-xl font-semibold"
           >
-            <ClockIcon /> <span>3:00</span>
+            <ClockIcon />{" "}
+            <span>
+              {!startCountdown && <>3:00</>}
+              {startCountdown && <Counter />}
+            </span>
           </div>
         </div>
       </section>
