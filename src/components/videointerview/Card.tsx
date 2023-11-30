@@ -187,14 +187,12 @@ const Card = () => {
             onClick={handleStopRecording}
             disabled={recordingStatus !== "recording"}
           />
-          {recordingStatus === "recording" && (
-            <Button
-              label="Download"
-              onClick={handleDownload}
-              disabled={!mediaBlobUrl}
-              secondary={true}
-            />
-          )}
+          <Button
+            label="Download"
+            onClick={handleDownload}
+            disabled={!mediaBlobUrl}
+            secondary={true}
+          />
         </div>
       </section>
     </section>
