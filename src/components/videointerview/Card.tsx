@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import Webcam from "react-webcam";
+import Alert from "../Alert";
+import Button from "../Button";
 import Counter from "../Counter";
 import ClockIcon from "../icons/ClockIcon";
+import WifiBadIcon from "../icons/WifiBadIcon";
 import WifiGoodIcon from "../icons/WifiGoodIcon";
 
 const questionDemo =
   "Alcuni colleghi si sono dimessi nello stesso periodo. Come tuo capo, ti chiedo di lavorare per tre sabati consecutivi, in straordinario, per metterci in pari con il lavoro. Parlando con gli altri tuoi colleghi, noti un certo malumore a riguardo. Convincimi a non lavorare di sabato.";
 
 const Card = () => {
+  // Extra: alert status wifi
+  const [wifiBad, setWifiBad] = useState(false);
+
   // Extra: countdown
   const [startCountdown, setStartCountdon] = useState(false);
 
@@ -103,8 +109,19 @@ const Card = () => {
     console.log("download");
   };
 
+  // Extra: finto check della rete wifi, mostro solo il banner in realtà
+  const handleViewAlert = () => {
+    setWifiBad(true);
+    console.log("Wifi click ");
+  };
+
+  const handleHiddenAlert = () => {
+    setWifiBad(false);
+  };
+
   return (
     <section id="card" className="bg-white p-6 flex flex-col gap-4">
+      {wifiBad && <Alert />}
       <section className="flex flex-row justify-between">
         <h3 className="text-xl font-bold">Domanda 1 di 3</h3>
         <div
@@ -112,7 +129,12 @@ const Card = () => {
           className="flex flex-row gap-2 items-center"
         >
           <div id="wifiStatus">
-            <WifiGoodIcon />
+            <button onClick={handleViewAlert}>
+              {wifiBad && <WifiBadIcon />}
+            </button>
+            <button onClick={handleHiddenAlert}>
+              {!wifiBad && <WifiGoodIcon />}
+            </button>
           </div>
           <div
             id="timer"
@@ -127,12 +149,13 @@ const Card = () => {
         </div>
       </section>
       <section
+        id="question"
         style={{
           backgroundColor: "#FFF0E6",
         }}
         className="p-3 rounded-lg w-[786px] h-[316px]"
       >
-        <h3 className="text-xl font-semibold">{questionDemo}</h3>
+        <h3 className="font-semibold">{questionDemo}</h3>
       </section>
       <section id="webcam_area">
         <div id="webcam_center">
@@ -153,28 +176,25 @@ const Card = () => {
             <p className="text-red-600">Registrazione in corso...</p>
           )}
         </div>
-        <div id="actionButton" className="flex flex-row gap-3">
-          <button
-            className="bg-indigo-600 hover:bg-indigo-800 cursor-pointer text-white font-bold py-2 px-4 rounded-full"
+        <div id="actionButton" className="flex gap-3 flex-row">
+          <Button
+            label="Registra"
             onClick={handleStartRecording}
             disabled={recordingStatus === "recording"}
-          >
-            Registra
-          </button>
-          <button
-            className="bg-indigo-600 hover:bg-indigo-800 cursor-pointer text-white font-bold py-2 px-4 rounded-full"
+          />
+          <Button
+            label="Stop"
             onClick={handleStopRecording}
             disabled={recordingStatus !== "recording"}
-          >
-            Ferma registrazione
-          </button>
-          <button
-            className="bg-indigo-600 hover:bg-indigo-800 cursor-pointer text-white font-bold py-2 px-4 rounded-full"
-            onClick={handleDownload}
-            disabled={!mediaBlobUrl}
-          >
-            Download
-          </button>
+          />
+          {recordingStatus === "recording" && (
+            <Button
+              label="Download"
+              onClick={handleDownload}
+              disabled={!mediaBlobUrl}
+              secondary={true}
+            />
+          )}
         </div>
       </section>
     </section>
